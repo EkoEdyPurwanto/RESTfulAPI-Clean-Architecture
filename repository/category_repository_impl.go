@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"EchoEdyP/RESTfulAPI-CleanArch/models"
+	"EchoEdyP/RESTfulAPI-CleanArch/models/domain"
 	"context"
 	"database/sql"
 	"errors"
@@ -11,16 +11,16 @@ import (
 type CategoryRepositoryImpl struct {
 }
 
-func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category models.Category) (models.Category, error) {
+func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
 	SQL := "INSERT INTO category(name) VALUES ($1) RETURNING id"
 	result, err := tx.ExecContext(ctx, SQL, category.Name)
 	if err != nil {
-		return models.Category{}, err
+		return domain.Category{}, err
 	}
 
 	id, err := result.LastInsertId()
 	if err != nil {
-		return models.Category{}, err
+		return domain.Category{}, err
 	}
 
 	category.Id = int(id)
@@ -28,18 +28,18 @@ func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, 
 
 }
 
-func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category models.Category) (models.Category, error) {
+func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
 	SQL := "UPDATE category SET name=$1 WHERE id=$2"
 	_, err := tx.ExecContext(ctx, SQL, category.Name, category.Id)
 	if err != nil {
-		return models.Category{}, err
+		return domain.Category{}, err
 	}
 
 	return category, nil
 
 }
 
-func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category models.Category) error {
+func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) error {
 	SQL := "DELETE FROM category WHERE id=$1"
 	_, err := tx.ExecContext(ctx, SQL, category.Id)
 	if err != nil {
@@ -49,23 +49,23 @@ func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx
 	return nil
 }
 
-func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (models.Category, error) {
+func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
 	SQL := "SELECT id, name FROM category WHERE id=$1"
 	row := tx.QueryRowContext(ctx, SQL, categoryId)
 
-	var category models.Category
+	var category domain.Category
 	err := row.Scan(&category.Id, &category.Name)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return models.Category{}, errors.New("Category is not found")
+			return domain.Category{}, errors.New("Category is not found")
 		}
-		return models.Category{}, err
+		return domain.Category{}, err
 	}
 
 	return category, nil
 }
 
-func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) ([]models.Category, error) {
+func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) ([]domain.Category, error) {
 	SQL := "SELECT id, name FROM category"
 	rows, err := tx.QueryContext(ctx, SQL)
 	if err != nil {
@@ -73,9 +73,9 @@ func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.T
 	}
 	defer rows.Close()
 
-	var categories []models.Category
+	var categories []domain.Category
 	for rows.Next() {
-		category := models.Category{}
+		category := domain.Category{}
 		err := rows.Scan(&category.Id, &category.Name)
 		if err != nil {
 			return nil, err
