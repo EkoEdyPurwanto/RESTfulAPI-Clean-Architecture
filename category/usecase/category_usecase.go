@@ -6,9 +6,9 @@ import (
 )
 
 type CategoryUseCase interface {
-	Create(ctx context.Context, request request_response.CategoryCreateRequest) request_response.CategoryResponse
-	Update(ctx context.Context, request request_response.CategoryUpdateRequest) request_response.CategoryResponse
-	Delete(ctx context.Context, categoryId int)
-	FindById(ctx context.Context, categoryId int) request_response.CategoryResponse
-	FindAll(ctx context.Context) []request_response.CategoryResponse
+	Create(ctx context.Context, request request_response.CategoryCreateRequest) (response request_response.CategoryResponse, err error)
+	Update(ctx context.Context, request request_response.CategoryUpdateRequest) (response request_response.CategoryResponse, err error)
+	Delete(ctx context.Context, categoryId int) (err error)
+	FindById(ctx context.Context, categoryId int) (response request_response.CategoryResponse, err error)
+	FindAll(ctx context.Context) (response []request_response.CategoryResponse, err error)
 }
