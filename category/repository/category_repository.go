@@ -8,10 +8,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type CategoryRepositoryImpl struct {
+type CategoryRepository struct {
 }
 
-func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
+func (repository *CategoryRepository) Save(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
 	SQL := "INSERT INTO category(name) VALUES ($1) RETURNING id"
 	result, err := tx.ExecContext(ctx, SQL, category.Name)
 	if err != nil {
@@ -28,7 +28,7 @@ func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, 
 
 }
 
-func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
+func (repository *CategoryRepository) Update(ctx context.Context, tx *sql.Tx, category domain.Category) (domain.Category, error) {
 	SQL := "UPDATE category SET name=$1 WHERE id=$2"
 	_, err := tx.ExecContext(ctx, SQL, category.Name, category.Id)
 	if err != nil {
@@ -39,7 +39,7 @@ func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx
 
 }
 
-func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) error {
+func (repository *CategoryRepository) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) error {
 	SQL := "DELETE FROM category WHERE id=$1"
 	_, err := tx.ExecContext(ctx, SQL, category.Id)
 	if err != nil {
@@ -49,7 +49,7 @@ func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx
 	return nil
 }
 
-func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
+func (repository *CategoryRepository) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
 	SQL := "SELECT id, name FROM category WHERE id=$1"
 	row := tx.QueryRowContext(ctx, SQL, categoryId)
 
@@ -65,7 +65,7 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.
 	return category, nil
 }
 
-func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) ([]domain.Category, error) {
+func (repository *CategoryRepository) FindAll(ctx context.Context, tx *sql.Tx) ([]domain.Category, error) {
 	SQL := "SELECT id, name FROM category"
 	rows, err := tx.QueryContext(ctx, SQL)
 	if err != nil {

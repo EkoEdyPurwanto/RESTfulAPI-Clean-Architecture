@@ -9,13 +9,13 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type CategoryUseCaseImpl struct {
+type CategoryUseCase struct {
 	CategoryRepository domain.CategoryRepository
 	DB                 *sql.DB
 	Validate           *validator.Validate
 }
 
-func (useCase *CategoryUseCaseImpl) Create(ctx context.Context, request request_response.CategoryCreateRequest) (response request_response.CategoryResponse, err error) {
+func (useCase *CategoryUseCase) Create(ctx context.Context, request request_response.CategoryCreateRequest) (response request_response.CategoryResponse, err error) {
 	err = useCase.Validate.Struct(request)
 	if err != nil {
 		return request_response.CategoryResponse{}, err
@@ -39,7 +39,7 @@ func (useCase *CategoryUseCaseImpl) Create(ctx context.Context, request request_
 	return helper.ToCategoryRespones(category), nil
 }
 
-func (useCase *CategoryUseCaseImpl) Update(ctx context.Context, request request_response.CategoryUpdateRequest) (response request_response.CategoryResponse, err error) {
+func (useCase *CategoryUseCase) Update(ctx context.Context, request request_response.CategoryUpdateRequest) (response request_response.CategoryResponse, err error) {
 	err = useCase.Validate.Struct(request)
 	if err != nil {
 		return request_response.CategoryResponse{}, err
@@ -66,7 +66,7 @@ func (useCase *CategoryUseCaseImpl) Update(ctx context.Context, request request_
 	return helper.ToCategoryRespones(category), nil
 }
 
-func (useCase *CategoryUseCaseImpl) Delete(ctx context.Context, categoryId int) (err error) {
+func (useCase *CategoryUseCase) Delete(ctx context.Context, categoryId int) (err error) {
 	tx, err := useCase.DB.Begin()
 	if err != nil {
 		return err
@@ -86,7 +86,7 @@ func (useCase *CategoryUseCaseImpl) Delete(ctx context.Context, categoryId int) 
 	return nil
 }
 
-func (useCase *CategoryUseCaseImpl) FindById(ctx context.Context, categoryId int) (response request_response.CategoryResponse, err error) {
+func (useCase *CategoryUseCase) FindById(ctx context.Context, categoryId int) (response request_response.CategoryResponse, err error) {
 	tx, err := useCase.DB.Begin()
 	if err != nil {
 		return request_response.CategoryResponse{}, err
@@ -101,7 +101,7 @@ func (useCase *CategoryUseCaseImpl) FindById(ctx context.Context, categoryId int
 	return helper.ToCategoryRespones(category), nil
 }
 
-func (useCase *CategoryUseCaseImpl) FindAll(ctx context.Context) (response []request_response.CategoryResponse, err error) {
+func (useCase *CategoryUseCase) FindAll(ctx context.Context) (response []request_response.CategoryResponse, err error) {
 	tx, err := useCase.DB.Begin()
 	if err != nil {
 		return []request_response.CategoryResponse{}, err
