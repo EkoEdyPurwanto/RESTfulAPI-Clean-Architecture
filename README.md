@@ -9,3 +9,4 @@ step by step
 7. implement models/domain/entity
 8. implement repository (interface & impl from interface)
 9. implement useCase and struct for requests and responses put in models directory (interface & impl from interface)
+10. implement category validation in useCase use https://github.com/go-playground/validator

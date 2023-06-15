@@ -6,14 +6,21 @@ import (
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
 	"context"
 	"database/sql"
+	"github.com/go-playground/validator/v10"
 )
 
 type CategoryUseCaseImpl struct {
 	CategoryRepository domain.CategoryRepository
 	DB                 *sql.DB
+	Validate           *validator.Validate
 }
 
 func (useCase *CategoryUseCaseImpl) Create(ctx context.Context, request request_response.CategoryCreateRequest) (response request_response.CategoryResponse, err error) {
+	err = useCase.Validate.Struct(request)
+	if err != nil {
+		return request_response.CategoryResponse{}, err
+	}
+
 	tx, err := useCase.DB.Begin()
 	if err != nil {
 		return request_response.CategoryResponse{}, err
@@ -33,6 +40,11 @@ func (useCase *CategoryUseCaseImpl) Create(ctx context.Context, request request_
 }
 
 func (useCase *CategoryUseCaseImpl) Update(ctx context.Context, request request_response.CategoryUpdateRequest) (response request_response.CategoryResponse, err error) {
+	err = useCase.Validate.Struct(request)
+	if err != nil {
+		return request_response.CategoryResponse{}, err
+	}
+
 	tx, err := useCase.DB.Begin()
 	if err != nil {
 		return request_response.CategoryResponse{}, err
