@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"EchoEdyP/RESTfulAPI-CleanArch/models/domain"
-	"EchoEdyP/RESTfulAPI-CleanArch/models/request_response"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/domain"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
 )
 
 func ToCategoryRespones(category domain.Category) request_response.CategoryResponse {

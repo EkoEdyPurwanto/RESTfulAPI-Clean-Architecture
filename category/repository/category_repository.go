@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"EchoEdyP/RESTfulAPI-CleanArch/models/domain"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/domain"
 	"context"
 	"database/sql"
 )

@@ -1,4 +1,4 @@
-module EchoEdyP/RESTfulAPI-CleanArch
+module EchoEdyP/RESTfulAPI-Clean-Architecture
 
 go 1.20
 

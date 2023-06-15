@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"EchoEdyP/RESTfulAPI-CleanArch/models/request_response"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
 	"context"
 )
 

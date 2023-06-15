@@ -1,10 +1,10 @@
 package usecase
 
 import (
-	"EchoEdyP/RESTfulAPI-CleanArch/category/repository"
-	"EchoEdyP/RESTfulAPI-CleanArch/helper"
-	"EchoEdyP/RESTfulAPI-CleanArch/models/domain"
-	"EchoEdyP/RESTfulAPI-CleanArch/models/request_response"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/category/repository"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/helper"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/domain"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
 	"context"
 	"database/sql"
 )
