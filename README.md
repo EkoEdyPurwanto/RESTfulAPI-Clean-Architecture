@@ -11,3 +11,4 @@ step by step
 9. implement useCase and struct for requests and responses put in models directory (interface & impl from interface)
 10. implement category validation in useCase use https://github.com/go-playground/validator
 11. implement delivery (interface & impl from interface)
+12. generate constructor in delivery, useCase and repository

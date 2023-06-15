@@ -13,6 +13,12 @@ type CategoryDelivery struct {
 	CategoryUseCase domain.CategoryUseCase
 }
 
+func NewCategoryDelivery(categoryUseCase domain.CategoryUseCase) domain.CategoryDelivery {
+	return &CategoryDelivery{
+		CategoryUseCase: categoryUseCase,
+	}
+}
+
 func (delivery *CategoryDelivery) Create(c echo.Context) error {
 	categoryCreateRequest := request_response.CategoryCreateRequest{}
 	err := helper.ReadFromRequestBody(c, &categoryCreateRequest)

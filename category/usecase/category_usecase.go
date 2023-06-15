@@ -15,6 +15,14 @@ type CategoryUseCase struct {
 	Validate           *validator.Validate
 }
 
+func NewCategoryUseCase(categoryRepository domain.CategoryRepository, DB *sql.DB, validate *validator.Validate) domain.CategoryUseCase {
+	return &CategoryUseCase{
+		CategoryRepository: categoryRepository,
+		DB:                 DB,
+		Validate:           validate,
+	}
+}
+
 func (useCase *CategoryUseCase) Create(ctx context.Context, request request_response.CategoryCreateRequest) (response request_response.CategoryResponse, err error) {
 	err = useCase.Validate.Struct(request)
 	if err != nil {
