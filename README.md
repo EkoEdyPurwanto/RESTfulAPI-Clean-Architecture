@@ -12,3 +12,4 @@ step by step
 10. implement category validation in useCase use https://github.com/go-playground/validator
 11. implement delivery (interface & impl from interface)
 12. generate constructor in delivery, useCase and repository
+13. install spf13/viper for configuration
