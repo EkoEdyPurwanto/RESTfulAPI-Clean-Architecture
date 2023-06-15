@@ -4,6 +4,7 @@ import (
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
 	"context"
 	"database/sql"
+	"github.com/labstack/echo/v4"
 )
 
 type Category struct {
@@ -25,4 +26,12 @@ type CategoryUseCase interface {
 	Delete(ctx context.Context, categoryId int) (err error)
 	FindById(ctx context.Context, categoryId int) (response request_response.CategoryResponse, err error)
 	FindAll(ctx context.Context) (response []request_response.CategoryResponse, err error)
+}
+
+type CategoryDelivery interface {
+	Create(c echo.Context) error
+	Update(c echo.Context) error
+	Delete(c echo.Context) error
+	FindById(c echo.Context) error
+	FindAll(c echo.Context) error
 }
