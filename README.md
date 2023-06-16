@@ -14,5 +14,5 @@ step by step
 12. generate constructor in delivery, useCase and repository
 13. install spf13/viper for configuration
 14. implement router 
-15. implement database open and create env
+15. implement open database and create env
 16. implement server
