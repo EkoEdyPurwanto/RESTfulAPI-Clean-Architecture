@@ -21,13 +21,14 @@ func (repository *CategoryRepository) Save(ctx context.Context, tx *sql.Tx, cate
 	if err != nil {
 		return domain.Category{}, err
 	}
-
-	id, err := result.LastInsertId()
+	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		return domain.Category{}, err
 	}
 
-	category.Id = int(id)
+	if rowsAffected != 1 {
+		return domain.Category{}, errors.New("failed to save category")
+	}
 	return category, nil
 
 }
@@ -40,7 +41,6 @@ func (repository *CategoryRepository) Update(ctx context.Context, tx *sql.Tx, ca
 	}
 
 	return category, nil
-
 }
 
 func (repository *CategoryRepository) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) error {
@@ -55,18 +55,22 @@ func (repository *CategoryRepository) Delete(ctx context.Context, tx *sql.Tx, ca
 
 func (repository *CategoryRepository) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
 	SQL := "SELECT id, name FROM category WHERE id=$1"
-	row := tx.QueryRowContext(ctx, SQL, categoryId)
-
-	var category domain.Category
-	err := row.Scan(&category.Id, &category.Name)
+	rows, err := tx.QueryContext(ctx, SQL, categoryId)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return domain.Category{}, errors.New("Category is not found")
-		}
 		return domain.Category{}, err
 	}
+	defer rows.Close()
 
-	return category, nil
+	category := domain.Category{}
+	if rows.Next() {
+		err := rows.Scan(&category.Id, &category.Name)
+		if err != nil {
+			return domain.Category{}, err
+		}
+		return category, nil
+	} else {
+		return category, errors.New("category is not found")
+	}
 }
 
 func (repository *CategoryRepository) FindAll(ctx context.Context, tx *sql.Tx) ([]domain.Category, error) {

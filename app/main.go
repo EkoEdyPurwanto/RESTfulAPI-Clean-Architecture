@@ -40,7 +40,7 @@ func main() {
 	}
 	err = dbConn.Ping()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to ping the database:", err)
 	}
 
 	defer func() {

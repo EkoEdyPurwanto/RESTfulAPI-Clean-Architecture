@@ -1,0 +1,29 @@
+### Get all categories
+GET http://localhost:1323/category
+Accept: application/json
+
+### Create new category
+POST http://localhost:1323/category
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "X besar"
+}
+
+### Get category by Id
+GET http://localhost:1323/category/2
+Accept: application/json
+
+### Update category by id
+PUT http://localhost:1323/category/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "fashion"
+}
+
+### Delete category by id
+DELETE http://localhost:1323/category/1
+Accept: application/json

@@ -16,3 +16,4 @@ step by step
 14. implement router 
 15. implement open database and create env
 16. implement server
+17. implement test.http if there is an error fix it

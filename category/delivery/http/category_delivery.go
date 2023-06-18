@@ -19,9 +19,9 @@ func NewCategoryDelivery(e *echo.Echo, categoryUseCase domain.CategoryUseCase) d
 	}
 	e.GET("/category", delivery.FindAll)
 	e.POST("/category", delivery.Create)
-	e.PUT("/category/categoryId", delivery.Update)
-	e.GET("/category/categoryId", delivery.FindById)
-	e.DELETE("/category/categoryId", delivery.Delete)
+	e.PUT("/category/:categoryId", delivery.Update)
+	e.GET("/category/:categoryId", delivery.FindById)
+	e.DELETE("/category/:categoryId", delivery.Delete)
 
 	return delivery
 }

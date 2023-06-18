@@ -3,9 +3,6 @@
   "server": {
     "address": ":1323"
   },
-  "context": {
-    "timeout": 2
-  },
   "database": {
     "host": "localhost",
     "port": "5432",
