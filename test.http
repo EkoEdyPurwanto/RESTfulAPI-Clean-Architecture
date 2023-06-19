@@ -8,7 +8,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name" : "X besar"
+  "name" : "Junk Food"
 }
 
 ### Get category by Id
@@ -21,7 +21,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name" : "fashion"
+  "name" : "Healthy Food"
 }
 
 ### Delete category by id
