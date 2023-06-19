@@ -13,7 +13,7 @@ type CategoryDelivery struct {
 	CategoryUseCase domain.CategoryUseCase
 }
 
-func NewCategoryDelivery(e *echo.Echo, categoryUseCase domain.CategoryUseCase) domain.CategoryDelivery {
+func NewCategoryDelivery(e *echo.Echo, categoryUseCase domain.CategoryUseCase) {
 	delivery := &CategoryDelivery{
 		CategoryUseCase: categoryUseCase,
 	}
@@ -23,7 +23,7 @@ func NewCategoryDelivery(e *echo.Echo, categoryUseCase domain.CategoryUseCase) d
 	e.GET("/category/:categoryId", delivery.FindById)
 	e.DELETE("/category/:categoryId", delivery.Delete)
 
-	return delivery
+	//return delivery
 }
 
 func (delivery *CategoryDelivery) Create(c echo.Context) error {
