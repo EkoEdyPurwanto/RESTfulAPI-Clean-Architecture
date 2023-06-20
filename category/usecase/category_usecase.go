@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/exception"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/helper"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/domain"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
@@ -61,7 +62,7 @@ func (useCase *CategoryUseCase) Update(ctx context.Context, request request_resp
 
 	category, err := useCase.CategoryRepository.FindById(ctx, tx, request.Id)
 	if err != nil {
-		return request_response.CategoryResponse{}, err
+		return request_response.CategoryResponse{}, exception.NewNotFoundError(err.Error())
 	}
 
 	category.Name = request.Name
@@ -83,7 +84,7 @@ func (useCase *CategoryUseCase) Delete(ctx context.Context, categoryId int) (err
 
 	category, err := useCase.CategoryRepository.FindById(ctx, tx, categoryId)
 	if err != nil {
-		return err
+		return exception.NewNotFoundError(err.Error())
 	}
 
 	err = useCase.CategoryRepository.Delete(ctx, tx, category)
@@ -103,7 +104,7 @@ func (useCase *CategoryUseCase) FindById(ctx context.Context, categoryId int) (r
 
 	category, err := useCase.CategoryRepository.FindById(ctx, tx, categoryId)
 	if err != nil {
-		return request_response.CategoryResponse{}, err
+		return request_response.CategoryResponse{}, exception.NewNotFoundError(err.Error())
 	}
 
 	return helper.ToCategoryRespones(category), nil

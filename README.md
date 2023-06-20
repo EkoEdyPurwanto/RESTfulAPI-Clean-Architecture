@@ -17,3 +17,4 @@ step by step
 15. implement open database and create env
 16. implement server
 17. implement test.http if there is an error fix it
+18. implement error handling 

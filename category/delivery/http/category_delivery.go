@@ -1,6 +1,7 @@
 package http
 
 import (
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/exception"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/helper"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/domain"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/models/request_response"
@@ -23,7 +24,7 @@ func NewCategoryDelivery(e *echo.Echo, categoryUseCase domain.CategoryUseCase) {
 	e.GET("/category/:categoryId", delivery.FindById)
 	e.DELETE("/category/:categoryId", delivery.Delete)
 
-	//return delivery
+	e.HTTPErrorHandler = exception.ErrorHandling
 }
 
 func (delivery *CategoryDelivery) Create(c echo.Context) error {
