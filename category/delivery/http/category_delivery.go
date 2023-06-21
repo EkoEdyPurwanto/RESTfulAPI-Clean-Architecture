@@ -78,7 +78,10 @@ func (delivery *CategoryDelivery) Delete(c echo.Context) error {
 	id, err := strconv.Atoi(categoryId)
 	helper.PanicIfError(err)
 
-	delivery.CategoryUseCase.Delete(c.Request().Context(), id)
+	err = delivery.CategoryUseCase.Delete(c.Request().Context(), id)
+	if err != nil {
+		return err
+	}
 	response := request_response.Response{
 		Status:  http.StatusOK,
 		Message: "OK",
