@@ -2,7 +2,7 @@ package main
 
 import (
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/category/delivery/http"
-	"EchoEdyP/RESTfulAPI-Clean-Architecture/category/repository"
+	"EchoEdyP/RESTfulAPI-Clean-Architecture/category/repository/postgres"
 	"EchoEdyP/RESTfulAPI-Clean-Architecture/category/usecase"
 	"database/sql"
 	"fmt"
@@ -52,7 +52,7 @@ func main() {
 
 	e := echo.New()
 	validate := validator.New()
-	categoryRepository := repository.NewCategoryRepository()
+	categoryRepository := postgres.NewCategoryRepository()
 	categoryUseCase := usecase.NewCategoryUseCase(categoryRepository, dbConn, validate)
 	http.NewCategoryDelivery(e, categoryUseCase)
 
