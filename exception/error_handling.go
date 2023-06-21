@@ -9,18 +9,18 @@ import (
 )
 
 func ErrorHandling(err error, c echo.Context) {
-	if notFoundError(err, c) {
+	if ErrNotFound(err, c) {
 		return
 	}
 
-	if validationError(err, c) {
+	if ErrValidation(err, c) {
 		return
 	}
 
-	internalServerError(err, c)
+	ErrInternalServer(err, c)
 }
 
-func notFoundError(err error, c echo.Context) bool {
+func ErrNotFound(err error, c echo.Context) bool {
 	exception, ok := err.(NotFoundError)
 	if ok {
 		c.Response().Header().Add(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -39,7 +39,7 @@ func notFoundError(err error, c echo.Context) bool {
 	}
 }
 
-func validationError(err error, c echo.Context) bool {
+func ErrValidation(err error, c echo.Context) bool {
 	exception, ok := err.(validator.ValidationErrors)
 	if ok {
 		c.Response().Header().Add(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -58,7 +58,7 @@ func validationError(err error, c echo.Context) bool {
 	}
 }
 
-func internalServerError(err error, c echo.Context) {
+func ErrInternalServer(err error, c echo.Context) {
 	c.Response().Header().Add(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "*")
 
