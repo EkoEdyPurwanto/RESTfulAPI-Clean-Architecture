@@ -4,7 +4,7 @@ LABEL authors="echoedyp"
 LABEL company="pondok programmer"
 LABEL reachMe="https://github.com/EchoEdyP"
 
-RUN apk update && apk add --no-cache git
+RUN apk update && apk add --no-cache git curl
 
 WORKDIR /go/src/app
 
