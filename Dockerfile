@@ -5,8 +5,6 @@ LABEL authors="echoedyp"
 LABEL company="pondok programmer"
 LABEL reachMe="https://github.com/EchoEdyP"
 
-RUN apk update && apk upgrade && apk add --no-cache git curl
-
 WORKDIR /app
 
 COPY . .
@@ -19,7 +17,10 @@ FROM alpine:3.18
 
 WORKDIR /app
 
+RUN apk update && apk upgrade && apk --no-cache add git curl
+
 COPY --from=builder /app/categoryApp .
+COPY config.json /app/config.json
 
 EXPOSE 1323
 
