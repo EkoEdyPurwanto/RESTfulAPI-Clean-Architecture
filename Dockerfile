@@ -20,7 +20,7 @@ WORKDIR /app
 RUN apk update && apk upgrade && apk --no-cache add git curl
 
 COPY --from=builder /app/categoryApp .
-COPY config.json /app/config.json
+COPY --from=builder /app/config.json .
 
 EXPOSE 1323
 
