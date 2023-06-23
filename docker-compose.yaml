@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  category-api:
+    container_name: category-management-api
+    image: echoedyp/category-app:v1
+    ports:
+      - "1323"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    networks:
+      - catpsql-net
+    links:
+      - postgresql
+
+  postgresql:
+    container_name: psql-container
+    image: postgres:15.3
+    ports:
+      - "5432"
+    environment:
+      - POSTGRES_USER=eepsql
+      - POSTGRES_PASSWORD=1903
+      - POSTGRES_DB=restfulapi_clean_architecture
+    networks:
+      - catpsql-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "eepsql", "-d", "restfulapi_clean_architecture"]
+      timeout: 5s
+      retries: 10
+
+networks:
+  catpsql-net:
+    name: catpsql-net
+    driver: bridge
