@@ -18,3 +18,5 @@ step by step
 16. implement server
 17. implement test.http if there is an error fix it
 18. implement error handling 
+19. implement Dockerfile
+20. implement docker-compose.yaml
