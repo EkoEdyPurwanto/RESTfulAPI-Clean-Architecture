@@ -32,7 +32,10 @@ func ErrNotFound(err error, c echo.Context) bool {
 			Data:    exception.Error(),
 		}
 		c.Response().WriteHeader(apiResponse.Status)
-		helper.WriteToResponseBody(c, apiResponse)
+		err := helper.WriteToResponseBody(c, apiResponse)
+		if err != nil {
+			return false
+		}
 		return true
 	} else {
 		return false
@@ -51,7 +54,10 @@ func ErrValidation(err error, c echo.Context) bool {
 			Data:    exception.Error(),
 		}
 		c.Response().WriteHeader(apiResponse.Status)
-		helper.WriteToResponseBody(c, apiResponse)
+		err := helper.WriteToResponseBody(c, apiResponse)
+		if err != nil {
+			return false
+		}
 		return true
 	} else {
 		return false
@@ -68,5 +74,8 @@ func ErrInternalServer(err error, c echo.Context) {
 		Data:    err.Error(),
 	}
 	c.Response().WriteHeader(apiResponse.Status)
-	helper.WriteToResponseBody(c, apiResponse)
+	err = helper.WriteToResponseBody(c, apiResponse)
+	if err != nil {
+		return
+	}
 }

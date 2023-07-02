@@ -21,3 +21,4 @@ step by step
 19. implement Dockerfile
 20. implement docker-compose.yaml
 21. implement Detecting Security Vulnerabilities In Dependencies (go.mod) by doing 'osv-scanner --lockfile=go.mod' use https://github.com/google/osv-scanner 
+22. implement Fixing Bug or Search Code That is Not Common by doing 'golangci-lint run' use https://github.com/golangci/golangci-lint
