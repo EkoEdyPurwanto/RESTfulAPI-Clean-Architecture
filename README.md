@@ -20,3 +20,4 @@ step by step
 18. implement error handling 
 19. implement Dockerfile
 20. implement docker-compose.yaml
+21. implement Detecting Security Vulnerabilities In Dependencies (go.mod) by doing 'osv-scanner --lockfile=go.mod' use https://github.com/google/osv-scanner 
