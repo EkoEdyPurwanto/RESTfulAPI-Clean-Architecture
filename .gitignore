@@ -18,5 +18,7 @@
 # vendor/
 
 # Docs
-postgreSql.txt
 script.sh
+
+# ALL About SQL
+postgreSql.sql
