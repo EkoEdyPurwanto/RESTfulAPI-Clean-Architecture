@@ -30,7 +30,7 @@ func main() {
 	dbPort := viper.GetString(`database.port`)
 	dbUser := viper.GetString(`database.user`)
 	dbPass := viper.GetString(`database.pass`)
-	dbName := viper.GetString(`database.name`)
+	dbName := viper.GetString(`database.DBname`)
 	connection := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", dbHost, dbPort, dbUser, dbPass, dbName) // Update the connection string for PostgreSQL
 
 	dbConn, err := sql.Open("postgres", connection)

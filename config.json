@@ -8,6 +8,6 @@
     "port": "5432",
     "user": "eepsql",
     "pass": "1903",
-    "name": "restfulapi_clean_architecture"
+    "DBname": "restfulapi_clean_architecture"
   }
 }
